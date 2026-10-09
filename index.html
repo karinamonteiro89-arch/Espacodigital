@@ -304,6 +304,60 @@ html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px)}
 .stkpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px}
 .stkpick button{min-height:52px;font-size:28px;border-radius:14px;border:3px solid var(--line);background:var(--card2)}
 .stkpick button[aria-pressed="true"]{border-color:var(--pink);background:var(--pink-soft)}
+.water{margin-top:16px;display:grid;grid-template-columns:120px 1fr;grid-template-areas:"p i" "a a";gap:6px 12px;align-items:center;background:linear-gradient(160deg,var(--card) 55%,var(--lilac-soft));border-radius:var(--r-lg);box-shadow:0 6px 0 var(--shade);padding:12px 14px 14px;border:3px solid transparent}
+.water.met{border-color:var(--done)}
+.wplant{grid-area:p;border:0;background:none;padding:0;width:120px;height:150px;min-height:64px}
+.wplant svg{width:100%;height:100%;display:block;overflow:visible}
+.pgrow{transform-box:fill-box;transform-origin:50% 100%}
+.pgrow.grow{animation:pgrow .9s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pgrow{0%{transform:scale(1)}35%{transform:scale(1.12,1.18)}70%{transform:scale(.97,.95)}100%{transform:scale(1)}}
+.winfo{grid-area:i;display:flex;flex-direction:column;gap:5px;min-width:0}
+.wtitle{font:800 20px/1.1 var(--font-display)}
+.wstage{font:800 16px/1.1 var(--font-display);color:var(--done)}
+.wdrops{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.wd{width:22px;height:22px;border-radius:50%;border:2.5px dashed var(--line);display:grid;place-items:center;font-size:17px;line-height:1}
+.wd.on{border:0;animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
+.wplus{font:800 15px/1 var(--font-display);color:var(--lilac)}
+.wmsg{font:800 16px/1.2 var(--font-display);color:var(--ink2)}
+.water.met .wmsg{color:var(--done)}
+.wnext{font:700 14px/1.2 var(--font-body);color:var(--ink2)}
+.wact{grid-area:a;display:flex;gap:10px;align-items:center}
+.btn.wbtn{flex:1;background:linear-gradient(135deg,#4aa8ff,#7fd3ff);color:#06284a;font-size:21px}
+.btn.wbtn[disabled]{opacity:.7}
+.wfall{position:fixed;z-index:92;pointer-events:none;font-size:34px;line-height:1;transform:translate(-50%,0);animation:wfall .8s cubic-bezier(.5,0,.8,.4) forwards}
+@keyframes wfall{0%{transform:translate(-50%,-40px);opacity:0}20%{opacity:1}100%{transform:translate(-50%,70px);opacity:0}}
+.wbig{width:150px}
+.wbig svg{width:100%;height:auto}
+.wrow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card2);border:2px solid var(--line);border-radius:18px;padding:6px 10px}
+.wrow .stepper output{min-width:80px;font-size:22px}
+@media (prefers-reduced-motion: reduce){.pgrow.grow,.wfall{animation:none}}
+.pbtn[aria-pressed="true"]{background:var(--lilac-soft)}
+@media (max-width:440px){
+  .chip.lvl{display:none}
+  .chip.stars{margin-inline-start:0}
+  #muteBtn{margin-inline-start:auto}
+  .top{gap:6px}
+  .chip{min-height:56px}
+  .chip.round{width:56px;font-size:26px}
+}
+.ntask{margin-top:16px;background:var(--card);border-radius:var(--r-lg);box-shadow:0 6px 0 var(--shade);padding:12px 14px 14px;border:3px solid var(--gold);display:flex;flex-direction:column;gap:10px}
+.ntask.slidein{animation:ntin .55s cubic-bezier(.3,1.4,.5,1)}
+@keyframes ntin{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.ntask.alldone{border-color:var(--done);background:var(--done-soft)}
+.nthead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ntl{font:800 15px/1 var(--font-display);color:var(--gold-ink);letter-spacing:.04em;text-transform:uppercase}
+.ntask.alldone .ntl{color:var(--done)}
+.ntc{font:800 15px/1 var(--font-display);color:var(--ink2);font-variant-numeric:tabular-nums}
+.ntbody{display:flex;align-items:center;gap:12px}
+.nti{position:relative;width:76px;height:76px;flex:none;border-radius:22px;background:var(--pink-soft);display:grid;place-items:center;font-size:46px;line-height:1}
+.ntask.alldone .nti{background:var(--card)}
+.nti.no::after{content:"🚫";position:absolute;right:-8px;bottom:-8px;font-size:28px}
+.ntt{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.ntn{font:800 22px/1.15 var(--font-display);text-wrap:balance}
+.ntt .pts{font-size:19px}
+.ntact{display:flex;gap:10px}
+.ntgo{flex:1;font-size:24px}
+@media (prefers-reduced-motion: reduce){.ntask.slidein{animation:none}}
 .tag{align-self:flex-start;font:800 13px/1 var(--font-display);background:var(--gold-soft);color:var(--gold-ink);border-radius:999px;padding:5px 9px}
 .swopts{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
 .swopt{min-height:110px;border:3px solid var(--line);border-radius:20px;background:var(--card2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px;text-align:center}
@@ -590,15 +644,20 @@ html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px)}
     <div class="chip stars" id="starChip" aria-live="polite" aria-label="Minhas estrelas"><span class="si">⭐</span><span class="n" id="starN">0</span></div>
     <div class="chip" id="streakChip" aria-label="Dias seguidos"><span>🌠</span><span class="n" id="streakN">0</span></div>
     <button class="chip round" id="muteBtn" aria-label="Ligar ou desligar o som">🔊</button>
+    <button class="chip round pbtn" id="parentsBtn" aria-label="Área dos pais" aria-pressed="false">🔒</button>
   </header>
 
   <main>
-    <section id="tab-missoes" class="view">
+    <section id="tab-hoje" class="view">
       <div class="hero" id="hero"></div>
-      <div class="journey" id="journey"></div>
-      <div id="nextUp"></div>
+      <div id="water"></div>
       <div id="piggy"></div>
+      <div id="nextTask"></div>
       <div id="note"></div>
+    </section>
+    <section id="tab-missoes" class="view" hidden>
+      <div class="panel-head"><h2 class="pill"><span class="bi">🌟</span>Missões de hoje</h2></div>
+      <div class="journey" id="journey"></div>
       <div id="blocks"></div>
     </section>
     <section id="tab-relogio" class="view" hidden></section>
@@ -611,12 +670,12 @@ html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px)}
 
 <nav class="tabs" aria-label="Abas">
   <div class="inner" role="tablist">
-    <button class="tab" role="tab" data-tab="missoes" aria-selected="true"><span class="i">🌟</span>Missões</button>
+    <button class="tab" role="tab" data-tab="hoje" aria-selected="true"><span class="i">🏠</span>Hoje</button>
+    <button class="tab" role="tab" data-tab="missoes" aria-selected="false"><span class="i">🌟</span>Missões</button>
     <button class="tab" role="tab" data-tab="relogio" aria-selected="false"><span class="i">⏰</span>Relógio</button>
     <button class="tab" role="tab" data-tab="jogos" aria-selected="false"><span class="i">🎮</span>Jogos</button>
-    <button class="tab" role="tab" data-tab="album" aria-selected="false"><span class="i">📖</span>Álbum</button>
     <button class="tab" role="tab" data-tab="loja" aria-selected="false"><span class="i">🛍️</span>Loja</button>
-    <button class="tab" role="tab" data-tab="pais" aria-selected="false"><span class="i">🔒</span>Pais</button>
+    <button class="tab" role="tab" data-tab="album" aria-selected="false"><span class="i">📖</span>Álbum</button>
   </div>
 </nav>
 
@@ -758,6 +817,7 @@ function defaults() {
     xp: 0, xpOn: true, customMsgs: [], myVoice: true, autoMyVoice: true,
     dayEdits: {},
     gameDone: {}, schedAlert: true, schedPre: true,
+    water: { goal: 6, bonus: 3 },
     schedule: defaultSchedule(),
     swapBank: [
       { id: 'sb1', icon: '🥣', name: 'Colocar ração para a Luna', pts: 2, block: 'luna' },
@@ -788,6 +848,7 @@ function normalize(o) {
       s.eq = Object.assign(defaults().eq, o.eq || {});
       s.counts = Object.assign(defaults().counts, o.counts || {});
       s.voice = Object.assign(defaults().voice, o.voice || {});
+      s.water = Object.assign(defaults().water, o.water || {});
       s.reward = Object.assign(defaults().reward, o.reward || {});
       if (typeof o.xp !== 'number') { const t = starTier(s.earned || 0); s.xp = Math.max((s.earned || 0) * 10, xpForLevel([1, 5, 10, 15][t])); }
       if (!(o.mig >= 2)) migrateV2(s);
@@ -926,11 +987,16 @@ const TROPHIES = [
   { id: 'cofre', icon: '🐷', name: 'Primeira recompensa', test: () => Object.keys(S.rewards || {}).length >= 1 },
   { id: 'jogo3', icon: '🎮', name: 'Nível 3 num jogo', test: () => Object.values(S.gameDone || {}).some(v => v >= 3) },
   { id: 'mestre', icon: '🏆', name: 'Mestre dos jogos', test: () => ['mem', 'pega', 'puzzle', 'conta'].every(g => ((S.gameDone || {})[g] || 0) >= 5) },
-  { id: 'pontual', icon: '⏰', name: 'Pontual como astronauta', test: () => (S.counts.sched || 0) >= 10 }
+  { id: 'pontual', icon: '⏰', name: 'Pontual como astronauta', test: () => (S.counts.sched || 0) >= 10 },
+  { id: 'agua5', icon: '💧', name: 'Super hidratada', test: () => (S.counts.wdays || 0) >= 5 },
+  { id: 'jardim', icon: '🌳', name: 'Jardineira das estrelas', test: () => plantStage() >= 10 }
 ];
 
 /* ---------- frases (mudam a cada dia) ---------- */
 const MSG = {
+  agua: ['Glub glub! A plantinha adorou, {N}!', 'Água fresquinha, plantinha feliz!', 'Seu corpo e a plantinha agradecem, {N}!', 'Mais um copo! Que princesa hidratada!',
+    'A plantinha está crescendo junto com você!', 'Água dá energia de foguete!', 'Gotinha mágica para você, {N}!', 'Hidratada como uma sereia!',
+    'Plim! A plantinha deu um pulinho de alegria!', 'Cada gotinha faz a plantinha crescer!'],
   geral: ['Uau, {N}! Você brilhou!', 'Missão cumprida, {N}!', '{N}, você é demais!', 'Mais estrelas pra você, {N}!', 'Que princesa caprichosa!',
     'A fadinha está dançando de alegria!', 'Toca aqui, {N}!', 'Você é uma super astronauta, {N}!', 'Que orgulho de você, {N}!',
     'Brilhou mais que uma estrela, {N}!', 'Plim plim! Mais uma missão, {N}!', 'Uhuu! Você voou alto, {N}!', 'Oba, oba! Que capricho, {N}!',
@@ -1263,7 +1329,8 @@ const VOICE_CATS = [
   { k: 'recado', ic: '💌', n: 'Recado do dia', ex: 'Bom dia, meu amor! Hoje vai ser lindo.', max: 20 },
   { k: 'oi', ic: '☀️', n: 'Oi / bom dia (balão da fadinha)', ex: 'Oi, Lara! Vamos às missões?', max: 6 },
   { k: 'jogo', ic: '🎮', n: 'Fim de jogo', ex: 'Você jogou muito bem!', max: 6 },
-  { k: 'quase', ic: '💫', n: 'Quase! Tenta de novo', ex: 'Quase! Tenta de novo, você consegue!', max: 4 }
+  { k: 'quase', ic: '💫', n: 'Quase! Tenta de novo', ex: 'Quase! Tenta de novo, você consegue!', max: 4 },
+  { k: 'agua', ic: '💧', n: 'Copo de água', ex: 'Glub glub! Muito bem, filha!', max: 6 }
 ];
 const AUDIO_EXT = /\.(m4a|mp3|aac|wav|ogg|oga|opus|webm|mp4|caf|3gp|amr)$/i;
 let clips = []; let idbOK = true; let dbP = null; let clipsReady = false;
@@ -1330,6 +1397,7 @@ function say(text, cat) {
   sayClip = c;
   sayNow = c ? (c.label || 'Recado da família! 🎧') : text;
   const p = $('#sayText'); if (p) p.textContent = sayNow;
+  if (current !== 'hoje' && $('#game').hidden) toast('🧚', sayNow, false);
 }
 function fairy(kind = 'jump') {
   const f = $('#fairy .fi'); if (!f) return;
@@ -1533,7 +1601,9 @@ function renderMissions() {
   const dots = all.map((t, i) => `<span class="tdot ${i < done ? 'on' : ''}" style="left:${((i + 1) / n * 100).toFixed(2)}%"></span>`).join('');
   $('#journey').innerHTML = `<div class="jrow"><div class="track-wrap" style="--p:${p.toFixed(3)}"><div class="track"><div class="fill"></div>${dots}</div><div class="ship" aria-hidden="true">${ship}</div></div><div class="goal ${n && done === n ? 'arrived' : ''}">${planetSVG()}</div></div><div class="jcount" aria-label="${done} de ${n} missões"><span>⭐</span><span>${done} / ${n}</span></div>`;
 
+  renderWater();
   renderNextUp();
+  renderNextTask();
   $('#piggy').innerHTML = piggyHTML();
   const nc = dailyClip();
   const note = nc ? (nc.label || 'Tem um recado gravado para você! Toque para ouvir 🎧') : dailyNote();
@@ -1569,6 +1639,33 @@ $('#piggy').addEventListener('click', e => {
   const pig = $('#pigBtn'); if (!pig) return;
   if (e.target.closest('#pigBtn')) { ac(); chime('coin'); replay(pig, 'jump'); const r = pig.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + 20, 10); speak(pig.dataset.talk); }
   else if (e.target.closest('#pigSay')) speak(pig.dataset.talk);
+});
+/* card "Próxima missão" da aba Hoje: mostra a primeira pendente, na ordem da lista de missões */
+const blockOrder = t => { const i = Object.keys(BLOCKS).indexOf(BLOCKS[t.block] ? t.block : 'arrumacao'); return i < 0 ? 99 : i; };
+let ntFresh = false;
+function renderNextTask() {
+  const el = $('#nextTask'); if (!el) return;
+  const k = todayKey(); const h = S.history[k] || { done: {} };
+  const all = dayPlan(k).filter(p => !p.off).map((p, i) => ({ t: p.t, i })).sort((a, b) => blockOrder(a.t) - blockOrder(b.t) || a.i - b.i).map(x => x.t);
+  if (!all.length) { el.innerHTML = ''; return; }
+  const pending = all.filter(t => !h.done[t.id]); const doneN = all.length - pending.length;
+  if (!pending.length) {
+    el.innerHTML = `<div class="ntask alldone"><div class="nthead"><span class="ntl">⭐ Missões de hoje</span><span class="ntc">${doneN} de ${all.length}</span></div><div class="ntbody"><span class="nti">🏰</span><div class="ntt"><span class="ntn">Todas feitas! Você chegou ao castelo! 🎉</span></div></div></div>`;
+    return;
+  }
+  const t = pending[0];
+  const stars = '⭐'.repeat(Math.min(t.pts, 5)) + (t.pts > 5 ? `+${t.pts - 5}` : '') + (S.xpOn ? ` <span class="xpt">⚡${taskXP(t)}</span>` : '');
+  el.innerHTML = `<div class="ntask ${ntFresh ? 'slidein' : ''}">
+    <div class="nthead"><span class="ntl">⭐ Próxima missão</span><span class="ntc">${doneN} de ${all.length}</span></div>
+    <div class="ntbody"><span class="nti ${t.no ? 'no' : ''}">${esc(t.icon)}</span><div class="ntt"><span class="ntn">${esc(t.name)}</span><span class="pts">${stars}</span></div><button class="spk" data-ntread="${t.id}" aria-label="Ouvir missão">🔊</button></div>
+    <div class="ntact"><button class="btn good ntgo" data-ntdo="${t.id}">✓ Fiz!</button><button class="btn alt" data-ntall="1">Ver todas</button></div>
+  </div>`;
+  ntFresh = false;
+}
+$('#nextTask').addEventListener('click', e => {
+  const d = e.target.closest('[data-ntdo]'); if (d) { ntFresh = true; doTask(d.dataset.ntdo, e.target.closest('.ntask')); return; }
+  const r = e.target.closest('[data-ntread]'); if (r) { const t = findTask(r.dataset.ntread); if (t) playOrSpeak('task:' + t.id, `${t.name}. Vale ${t.pts} ${t.pts === 1 ? 'estrela' : 'estrelas'}.`); return; }
+  if (e.target.closest('[data-ntall]')) { chime('tick'); showTab('missoes'); }
 });
 $('#blocks').addEventListener('click', e => {
   const b = e.target.closest('[data-act]'); if (!b) return;
@@ -1803,6 +1900,109 @@ function gCount(st) {
     next();
   });
 }
+
+/* ---------- plantinha da água: cresce com o total de copos e nunca murcha ---------- */
+const PLANT_NAMES = ['Sementinha', 'Brotinho', 'Mudinha', 'Plantinha', 'Plantinha feliz', 'Botão de flor', 'Primeira flor', 'Duas flores', 'Três flores', 'Quatro flores', 'Jardim de flores', 'Estrelinha mágica', 'Duas estrelinhas', 'Três estrelinhas', 'Quatro estrelinhas', 'Árvore das estrelas'];
+const PLANT_MAX = PLANT_NAMES.length - 1;
+const plantNeed = st => st * (st + 1) / 2;
+const waterTotal = () => Object.values(S.history || {}).reduce((a, h) => a + (h.water || 0), 0);
+function plantStage(total = waterTotal()) { let st = 0; while (st < PLANT_MAX && total >= plantNeed(st + 1)) st++; return st; }
+function plantSVG(st, happy) {
+  const base = 150; let g = '';
+  const h = st ? Math.min(118, 16 + st * 11) : 0; const top = base - h;
+  if (!st) g += `<ellipse cx="80" cy="141" rx="16" ry="6" fill="#8a5a33"/><ellipse cx="80" cy="134" rx="8" ry="6" fill="#c08a4e"/><path d="M80 129 q3 -7 9 -8" stroke="#6fcf8f" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+  else {
+    g += `<path d="M80 ${base} C ${76} ${base - h * .35}, ${86} ${base - h * .7}, 80 ${top}" stroke="#3f9e5f" stroke-width="${4 + Math.min(st, 8) * .45}" fill="none" stroke-linecap="round"/>`;
+    const L = Math.min(st, 7);
+    for (let i = 0; i < L; i++) {
+      const y = base - 12 - (h - 22) * (i + 1) / (L + 1); const side = i % 2 ? 1 : -1; const sz = 10 + Math.min(st, 8) * 1.3;
+      g += `<ellipse cx="${80 + side * sz * .9}" cy="${y}" rx="${sz}" ry="${sz * .5}" transform="rotate(${side * -28} ${80 + side * sz * .9} ${y})" fill="${i % 2 ? '#5cc47f' : '#4fb874'}"/><path d="M80 ${y} L ${80 + side * sz * 1.5} ${y - side * side * sz * .5}" stroke="#3f9e5f" stroke-width="1.5" opacity=".6"/>`;
+    }
+    if (st <= 4) g += `<ellipse cx="74" cy="${top + 2}" rx="7" ry="4" transform="rotate(-35 74 ${top + 2})" fill="#6fd492"/><ellipse cx="86" cy="${top + 2}" rx="7" ry="4" transform="rotate(35 86 ${top + 2})" fill="#6fd492"/>`;
+    if (st === 5) g += `<path d="M80 ${top - 16} C 70 ${top - 6}, 72 ${top + 4}, 80 ${top + 4} C 88 ${top + 4}, 90 ${top - 6}, 80 ${top - 16}Z" fill="#ff8fc7"/><path d="M80 ${top + 4} l-6 -4 M80 ${top + 4} l6 -4" stroke="#3f9e5f" stroke-width="2"/>`;
+    const flower = (cx, cy, r, c) => [0, 72, 144, 216, 288].map(a => `<circle cx="${(cx + Math.cos((a - 90) * Math.PI / 180) * r).toFixed(1)}" cy="${(cy + Math.sin((a - 90) * Math.PI / 180) * r).toFixed(1)}" r="${(r * .75).toFixed(1)}" fill="${c}"/>`).join('') + `<circle cx="${cx}" cy="${cy}" r="${(r * .62).toFixed(1)}" fill="#ffcf3f"/>`;
+    if (st >= 6) {
+      g += flower(80, top - 4, 11, '#ff6fb5');
+      const spots = [[52, base - h * .45, '#b996ff'], [108, base - h * .6, '#7fd3ff'], [56, base - h * .78, '#ffb347'], [104, base - h * .3, '#ff8fc7']];
+      for (let i = 0; i < Math.min(st - 6, 4); i++) g += flower(spots[i][0], spots[i][1], 7, spots[i][2]);
+    }
+    if (st >= 11) {
+      const ss = [[40, top + 20], [120, top + 26], [66, top - 22], [96, top - 20], [80, top - 34]];
+      for (let i = 0; i < Math.min(st - 10, 5); i++) g += `<path d="${starPath(ss[i][0], ss[i][1], 7, 3)}" fill="#ffcf3f" stroke="#fff" stroke-width="1.2"/>`;
+    }
+  }
+  const eyes = happy ? `<path d="M66 172 q4 -5 8 0 M86 172 q4 -5 8 0" stroke="#7a2350" stroke-width="2.6" fill="none" stroke-linecap="round"/>` : `<circle cx="70" cy="171" r="3" fill="#7a2350"/><circle cx="90" cy="171" r="3" fill="#7a2350"/>`;
+  const pot = `<path d="M44 152 L116 152 L106 196 L54 196 Z" fill="#ff8fc7"/><rect x="38" y="144" width="84" height="14" rx="7" fill="#ff6fb5"/><ellipse cx="80" cy="146" rx="36" ry="5" fill="#8a5a33"/>${eyes}<circle cx="62" cy="180" r="4" fill="#ff5fa8" opacity=".45"/><circle cx="98" cy="180" r="4" fill="#ff5fa8" opacity=".45"/><path d="M74 182 q6 6 12 0" stroke="#7a2350" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+  return `<svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plantinha: ${PLANT_NAMES[st]}"><g class="pgrow">${g}</g>${pot}</svg>`;
+}
+let lastDrink = 0, undoUntil = 0;
+function renderWater() {
+  const el = $('#water'); if (!el) return;
+  const k = todayKey(); const h = S.history[k] || {}; const n = h.water || 0; const goal = S.water.goal;
+  const total = waterTotal(); const st = plantStage(total); const met = n >= goal;
+  const drops = Array.from({ length: goal }, (_, i) => `<span class="wd ${i < n ? 'on' : ''}">${i < n ? '💧' : ''}</span>`).join('') + (n > goal ? `<span class="wplus">+${n - goal}</span>` : '');
+  const wait = Math.max(0, Math.ceil((lastDrink + 20000 - Date.now()) / 1000));
+  const next = st < PLANT_MAX ? plantNeed(st + 1) - total : 0;
+  el.innerHTML = `<div class="water ${met ? 'met' : ''}">
+    <button class="wplant" id="wPlant" aria-label="Plantinha: ${PLANT_NAMES[st]}">${plantSVG(st, met)}</button>
+    <div class="winfo">
+      <div class="wtitle">💧 Plantinha da água</div>
+      <div class="wstage">🌱 ${PLANT_NAMES[st]}</div>
+      <div class="wdrops" aria-label="${n} de ${goal} copos hoje">${drops}</div>
+      <div class="wmsg">${met ? 'Meta de hoje completa! 🎉' : `Faltam ${goal - n} ${goal - n === 1 ? 'copo' : 'copos'} hoje`}</div>
+      ${next ? `<div class="wnext">Cresce de novo em ${next} ${next === 1 ? 'copo' : 'copos'}</div>` : '<div class="wnext">A árvore mais linda do reino! 🌟</div>'}
+    </div>
+    <div class="wact">
+      <button class="btn wbtn" id="wDrink" ${wait ? 'disabled' : ''}>${wait ? '💧 Glub glub…' : '🥤 Bebi um copo!'}</button>
+      ${Date.now() < undoUntil ? '<button class="btn alt round" id="wUndo" aria-label="Desfazer o último copo">↩️</button>' : ''}
+      <button class="spk" id="wSay" aria-label="Ouvir">🔊</button>
+    </div>
+  </div>`;
+  if (wait) setTimeout(renderWater, wait * 1000 + 50);
+  if (Date.now() < undoUntil) setTimeout(() => { if (Date.now() >= undoUntil) renderWater(); }, undoUntil - Date.now() + 50);
+}
+function setWater(k, n) {
+  const h = hist(k); const before = h.water || 0; n = Math.max(0, Math.min(40, n)); if (n === before) return null;
+  h.water = n; h.ts = Date.now(); S.counts.water = Math.max(0, (S.counts.water || 0) + (n - before));
+  let reward = false;
+  if (n >= S.water.goal && !h.wgoal) { h.wgoal = true; S.stars += S.water.bonus; S.earned += S.water.bonus; if (S.xpOn) S.xp += 20; S.counts.wdays = (S.counts.wdays || 0) + 1; reward = true; urgentPush = true; }
+  return { reward };
+}
+function drinkWater() {
+  const k = todayKey(); const h = hist(k);
+  if ((h.water || 0) >= S.water.goal * 2) { toast('💧', `Uau, ${NAME}! Já bebeu muita água hoje!`, false); return; }
+  const stB = plantStage(); const lvB = xpLevel();
+  const res = setWater(k, (h.water || 0) + 1) || {};
+  lastDrink = Date.now(); undoUntil = Date.now() + 60000;
+  const stA = plantStage(); const trophies = checkTrophies(); save();
+  renderWater(); renderTop(); renderHero();
+  const pl = $('#wPlant'); if (pl) {
+    const r = pl.getBoundingClientRect();
+    const drop = document.createElement('span'); drop.className = 'wfall'; drop.textContent = '💧';
+    drop.style.left = (r.left + r.width / 2) + 'px'; drop.style.top = (r.top - 10) + 'px'; document.body.appendChild(drop);
+    setTimeout(() => drop.remove(), 900);
+    setTimeout(() => { replay(pl.querySelector('.pgrow'), 'grow'); burst(r.left + r.width / 2, r.top + r.height * .4, 14); }, 650);
+  }
+  chime('ok'); fairy('jump'); say(phrase('agua', 10), 'agua');
+  if (stA > stB) setTimeout(() => { chime('big'); confetti(); toast('🌱', `A plantinha cresceu! Agora é: ${PLANT_NAMES[stA]}`, true); }, 1000);
+  if (res.reward) setTimeout(() => {
+    chime('big'); confetti(); renderTop();
+    modal(`<div class="wbig dance">${plantSVG(stA, true)}</div><p class="big">Meta da água completa! 💧</p><p class="big money">+${S.water.bonus} ⭐${S.xpOn ? ' · +20 XP ⚡' : ''}</p><div class="row"><button class="btn alt round" data-cat="agua" data-say="Meta da água completa, ${NAME}! Você ganhou ${S.water.bonus} estrelas!" aria-label="Ouvir">🔊</button><button class="btn" data-close>💧 Oba!</button></div>`);
+  }, stA > stB ? 2600 : 900);
+  if (S.xpOn && res.reward && xpLevel() > lvB) setTimeout(() => levelToast(xpLevel()), 4200);
+  trophies.forEach((tr, i) => setTimeout(() => { toast(tr.icon, `Troféu novo: ${tr.name}!`); chime('big'); }, 4500 + i * 3300));
+}
+$('#water').addEventListener('click', e => {
+  ac();
+  if (e.target.closest('#wDrink')) { drinkWater(); return; }
+  if (e.target.closest('#wUndo')) { const k = todayKey(); const h = hist(k); if (h.water > 0) { h.water--; h.ts = Date.now(); S.counts.water = Math.max(0, (S.counts.water || 0) - 1); save(); } undoUntil = 0; lastDrink = 0; renderWater(); return; }
+  if (e.target.closest('#wSay') || e.target.closest('#wPlant')) {
+    const h = S.history[todayKey()] || {}; const n = h.water || 0; const st = plantStage();
+    replay($('#wPlant .pgrow'), 'grow');
+    const txt = n >= S.water.goal ? `Você já bebeu ${n} copos hoje! A plantinha está muito feliz!` : `Você bebeu ${n} ${n === 1 ? 'copo' : 'copos'} de água hoje. Faltam ${S.water.goal - n} para a meta! A plantinha é: ${PLANT_NAMES[st]}.`;
+    speak(txt); return;
+  }
+});
 
 /* ---------- relógio e horários ---------- */
 const WD = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
@@ -2169,6 +2369,7 @@ function planSection() {
     <div id="dayPanel" class="daypanel">
       <div class="dphead"><span class="plabel">${esc(dayLabel(k))}</span>${status}</div>
       ${(() => { const sk = S.stickers.find(x => x.d === k); return sk ? `<details class="daystk"><summary><span class="stk" style="--c:${sk.c};--rot:${sk.r || 0}deg">${sk.e}</span><span class="dst"><span class="pn">Adesivo do dia</span><span class="pm">Toque para trocar a figura</span></span></summary><div class="stkpick" role="group" aria-label="Escolher figura do adesivo">${STICKERS.map(em => `<button data-setstk="${em}" aria-pressed="${sk.e === em}">${em}</button>`).join('')}</div></details>` : ''; })()}
+      ${past ? `<div class="wrow"><span class="pn">💧 Água</span><div class="stepper"><button class="btn alt round" data-wday="-1" aria-label="Menos um copo">−</button><output>${(h.water || 0)} de ${S.water.goal}</output><button class="btn alt round" data-wday="1" aria-label="Mais um copo">+</button></div></div>` : ''}
       ${k !== todayKey() ? '<div class="row" style="justify-content:flex-start"><button class="btn alt" data-cday="' + todayKey() + '">↩️ Voltar para hoje</button></div>' : ''}
       <div>${rows || '<p class="small">Nenhuma missão neste dia.</p>'}</div>
       <div class="row" style="justify-content:flex-start">${past && !st.complete && st.total ? '<button class="btn good" data-allday="1">✓ Marcar todas como feitas</button>' : ''}<button class="btn" data-addextra="1">＋ Missão extra neste dia</button></div>
@@ -2332,6 +2533,15 @@ function renderParents() {
       <p class="small">Hoje: ${playsToday()} de ${S.gameLimit} partidas usadas.</p>
     </div>
 
+    <div class="card pcard pform"><h3>💧 Plantinha da água</h3>
+      <p class="small" style="margin:0">Cada toque em "Bebi um copo" rega a plantinha. Ela cresce com o total de copos e nunca murcha. Ao bater a meta do dia, a Lara ganha estrelas de bônus.</p>
+      <div class="plabel">Meta de copos por dia</div>
+      <div class="stepper"><button class="btn alt round" data-wgoal="-1" aria-label="Menos">−</button><output>${S.water.goal} 💧</output><button class="btn alt round" data-wgoal="1" aria-label="Mais">+</button></div>
+      <div class="plabel">Estrelas de bônus pela meta</div>
+      <div class="stepper"><button class="btn alt round" data-wbonus="-1" aria-label="Menos">−</button><output>${S.water.bonus} ⭐</output><button class="btn alt round" data-wbonus="1" aria-label="Mais">+</button></div>
+      <p class="small" style="margin:0">Plantinha: ${PLANT_NAMES[plantStage()]} (${waterTotal()} copos no total). Para corrigir os copos de um dia, use o calendário acima.</p>
+    </div>
+
     ${schedSection()}
 
     <div class="card pcard pform"><h3>⚡ Experiência (XP)</h3>
@@ -2407,6 +2617,9 @@ $('#tab-pais').addEventListener('click', e => {
   if (t.closest('[data-allday]')) { const k = planDay; let res = {}; dayTasks(k).forEach(tk => { const r = setTaskDone(k, tk, true); if (r) res = { sticker: res.sticker || r.sticker, reward: res.reward || r.reward }; }); finishParentEdit(k, res); return; }
   const bdl = t.closest('[data-bankdel]'); if (bdl) { S.swapBank = S.swapBank.filter(x => x.id !== bdl.dataset.bankdel); save(); renderParents(); return; }
   if (t.closest('#pExport')) { exportBackup(); const m = $('#pBkMsg'); if (m) m.textContent = 'Backup salvo nos downloads do aparelho.'; return; }
+  const wg = t.closest('[data-wgoal]'); if (wg) { S.water.goal = Math.min(12, Math.max(2, S.water.goal + +wg.dataset.wgoal)); save(); renderParents(); renderWater(); return; }
+  const wb = t.closest('[data-wbonus]'); if (wb) { S.water.bonus = Math.min(10, Math.max(0, S.water.bonus + +wb.dataset.wbonus)); save(); renderParents(); return; }
+  const wdy = t.closest('[data-wday]'); if (wdy) { const h = hist(planDay); const res = setWater(planDay, (h.water || 0) + +wdy.dataset.wday) || {}; checkTrophies(); save(); renderTop(); renderMissions(); renderParents(); if (res.reward) toast('💧', `Meta da água completa! +${S.water.bonus} ⭐`, false); return; }
   const se = t.closest('[data-sedit]'); if (se) { editSched(se.dataset.sedit); return; }
   const pl = t.closest('[data-play]'); if (pl) { const c = clips.find(x => x.id === pl.dataset.play); if (c) playClip(c); return; }
   const dc = t.closest('[data-delclip]');
@@ -2443,7 +2656,7 @@ $('#tab-pais').addEventListener('click', e => {
   if (t.closest('#pReset')) { confirmReset = true; renderParents(); return; }
   if (t.closest('#pResetNo')) { confirmReset = false; renderParents(); return; }
   if (t.closest('#pResetYes')) {
-    const keep = { tasks: S.tasks, altStart: S.altStart, gameCost: S.gameCost, gameLimit: S.gameLimit, luna: S.luna, muted: S.muted, autoSpeak: S.autoSpeak, swapBank: S.swapBank, dayEdits: S.dayEdits, voice: S.voice, reward: S.reward, mig: 2, xpOn: S.xpOn, customMsgs: S.customMsgs, myVoice: S.myVoice, autoMyVoice: S.autoMyVoice };
+    const keep = { tasks: S.tasks, altStart: S.altStart, gameCost: S.gameCost, gameLimit: S.gameLimit, luna: S.luna, muted: S.muted, autoSpeak: S.autoSpeak, swapBank: S.swapBank, dayEdits: S.dayEdits, voice: S.voice, water: S.water, reward: S.reward, mig: 2, xpOn: S.xpOn, customMsgs: S.customMsgs, myVoice: S.myVoice, autoMyVoice: S.autoMyVoice };
     keep.resetAt = Date.now(); S = Object.assign(defaults(), keep); confirmReset = false; save();
     sayNow = greeting(); sayClip = null; sayCat = 'oi'; renderAll(true); renderParents(); return;
   }
@@ -2535,13 +2748,14 @@ function editTask(id) {
 }
 
 /* ---------- navegação ---------- */
-let current = 'missoes';
+let current = 'hoje';
 function showTab(id) {
   if (current === 'pais' && id !== 'pais') { parentOK = false; confirmReset = false; }
   current = id;
   $$('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.tab === id ? 'true' : 'false'));
   $$('.view').forEach(v => { v.hidden = v.id !== 'tab-' + id; });
-  if (id === 'missoes') renderMissions();
+  if (id === 'missoes' || id === 'hoje') renderMissions();
+  const pb = $('#parentsBtn'); pb.setAttribute('aria-pressed', id === 'pais' ? 'true' : 'false'); pb.textContent = id === 'pais' ? '🔓' : '🔒';
   if (id === 'jogos') renderGames();
   if (id === 'relogio') renderClock();
   if (id === 'album') renderAlbum();
@@ -2551,6 +2765,7 @@ function showTab(id) {
 }
 $$('.tab').forEach(t => t.addEventListener('click', () => { chime('tick'); showTab(t.dataset.tab); }));
 $('#lvlChip').addEventListener('click', () => showTab('album'));
+$('#parentsBtn').addEventListener('click', () => { chime('tick'); showTab(current === 'pais' ? 'hoje' : 'pais'); });
 $('#muteBtn').addEventListener('click', () => { S.muted = !S.muted; save(); renderTop(); if (!S.muted) chime('ok'); else if ('speechSynthesis' in window) speechSynthesis.cancel(); });
 
 function renderAll(force) {
